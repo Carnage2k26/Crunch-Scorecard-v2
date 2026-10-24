@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crunch</title>
+<meta name="theme-color" content="#217d99">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Crunch">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#eef6fa;--card:#fff;--ink:#16323f;--mute:#5f7c8a;--acc:#217d99;--acc2:#4fc3b5;--bad:#c0392b;--line:#cfe3ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1e26;--card:#17303b;--ink:#e4f2f7;--mute:#8fb0bf;--acc:#4fb3d1;--acc2:#5eead4;--bad:#f87171;--line:#28485a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1e26;--card:#17303b;--ink:#e4f2f7;--mute:#8fb0bf;--acc:#4fb3d1;--acc2:#5eead4;--bad:#f87171;--line:#28485a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,sans-serif;max-width:520px;margin:auto;padding:14px}
+h1{margin:0 0 8px;font-size:28px;letter-spacing:-.5px}
+.sub{color:var(--mute);font-size:14px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+button,select,input{font:inherit;color:var(--ink)}
+input{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;margin:4px 0 8px}
+button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;cursor:pointer}
+button.p{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+button.g{background:var(--acc2);color:#10200f;border-color:var(--acc2);font-weight:600}
+button.d{color:var(--bad)}
+button.x5{background:linear-gradient(135deg,#450a0a,#b91c1c);color:#fff;border-color:#7f1d1d;font-weight:800;letter-spacing:.5px;text-shadow:0 0 8px rgba(0,0,0,.6);box-shadow:0 0 12px rgba(185,28,28,.5)}
+button.x5:active{animation:shk .3s}
+button.d.armc{background:#b91c1c;color:#fff;border-color:#b91c1c;font-weight:700;animation:pls .6s infinite alternate}
+button.x5.arm{background:#fff;color:#b91c1c;border-color:#b91c1c;text-shadow:none;animation:pls .6s infinite alternate}
+@keyframes pls{from{box-shadow:0 0 0 0 rgba(185,28,28,.7)}to{box-shadow:0 0 0 9px rgba(185,28,28,0)}}
+.cx{color:#ff0000;font-size:24px;font-weight:900;letter-spacing:2px;text-shadow:0 0 6px rgba(220,38,38,.55);vertical-align:middle}
+button.big2{padding:14px 8px;font-size:19px;line-height:1.2;min-height:80px;flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;text-align:center}
+#fx{position:fixed;inset:0;z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;color:#fff;background:radial-gradient(circle,rgba(185,28,28,.9),rgba(0,0,0,.95));animation:fxin .35s,fxs .6s .35s}
+#fx .t{font-size:42px;font-weight:900;color:#fca5a5;text-shadow:0 0 22px #ef4444;line-height:1.1}
+#fx .s{font-size:22px;margin-top:10px}
+@keyframes fxin{from{opacity:0;transform:scale(1.4)}to{opacity:1;transform:scale(1)}}
+@keyframes fxs{20%{transform:translate(-10px,6px)}40%{transform:translate(10px,-6px)}60%{transform:translate(-8px,-4px)}80%{transform:translate(8px,4px)}}
+@keyframes shk{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+button.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:700;box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 30%,transparent)}
+button:disabled{opacity:.4}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1}
+select{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px}
+.dice{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0}
+.dice select{width:100%;font-size:22px;text-align:center;padding:12px 0}
+.faces{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:8px 0 4px}
+.fc{padding:5px;background:#fff;border:2px solid var(--line);border-radius:12px}
+.dice button.sl2{padding:6px;width:100%;aspect-ratio:1;background:#fff;border:2px solid var(--acc);border-radius:14px}
+.dice button.sl2.x{border:2px dashed var(--line);background:transparent;opacity:.6}
+.dice button.sl2.lk{opacity:.5;filter:grayscale(1);background:var(--line);border:2px solid var(--line)}
+.pp{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);width:100%;aspect-ratio:1}
+.pp i{border-radius:50%;margin:12%}.pp i.on{background:#16323f}
+.row>.hd{flex:0 0 auto;font-size:24px;padding:6px 8px;cursor:grab;touch-action:none;user-select:none;color:var(--mute)}
+.big{font-size:44px;font-weight:700;text-align:center;line-height:1}
+.mute{color:var(--mute);font-size:13px}
+.pl{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:10px;border:2px solid transparent}
+.pl.cur{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,transparent)}
+.pl .n{font-weight:600;min-width:0;outline:none}
+.pl .s{font-size:22px;font-weight:700}
+.msg{color:var(--acc);font-weight:600;min-height:20px;text-align:center;margin:4px 0}
+.win{background:var(--acc2);color:#10200f;font-weight:700;text-align:center;padding:12px;border-radius:12px;margin-bottom:12px}
+details{margin-bottom:12px}summary{cursor:pointer;font-weight:600;padding:6px 0}
+.h{display:flex;justify-content:space-between;font-size:14px;padding:3px 0;border-bottom:1px solid var(--line)}
+</style></head><body>
+<h1>🎲 Crunch</h1>
+<p class="sub">Pick each die's face. Score no points and you crunch.</p>
+<div id="app"></div>
+<script>
+const KEY='crunch-v1';let armed5=false,armT=0,snaps=[],armedC=false,armCT=0;
+function snap(){snaps.push(JSON.stringify(S));if(snaps.length>10)snaps.shift()}
+let S={target:3000,thresh:300,playing:false,kept:[],players:[{name:'Player 1',score:0,started:false,crunches:0},{name:'Player 2',score:0,started:false,crunches:0}],cur:0,turn:0,hand:0,adds:[],hist:[],past:[],over:false,winner:null,msg:''};
+try{const t=localStorage.getItem(KEY);if(t)S=Object.assign(S,JSON.parse(t))}catch(e){}
+let d=[0,0,0,0,0];
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const need=()=>S.thresh;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function base(c){let sc=0,u=0;
+ for(let f=1;f<=6;f++){const n=c[f];if(!n)continue;
+  const single=f==1?100*n:f==5?50*n:0;
+  let set=0;if(n>=3)set=(f==1?1000:f*100)*Math.pow(2,n-3);
+  if(set>single){sc+=set;u+=n}else if(single){sc+=single;u+=n}}
+ return {sc,u}}
+function score(dice){const c=[0,0,0,0,0,0,0];dice.forEach(x=>{if(x)c[x]++});
+ let best=base(c);
+ [[1,2,3,4,5,500],[2,3,4,5,6,500],[1,2,3,4,0,300],[2,3,4,5,0,300],[3,4,5,6,0,300]].forEach(s=>{
+  const fs=s.slice(0,5).filter(Boolean);if(fs.some(f=>!c[f]))return;
+  const c2=c.slice();fs.forEach(f=>c2[f]--);
+  const b=base(c2),sc=s[5]+b.sc,u=fs.length+b.u;
+  if(sc>best.sc||(sc==best.sc&&u>best.u))best={sc,u}});
+ for(let f=1;f<=6;f++)if(c[f]==3)for(let g=1;g<=6;g++)if(g!=f&&c[g]==2){const sc=(f==1?1000:f*100)+200;if(sc>best.sc||(sc==best.sc&&best.u<5))best={sc,u:5}}
+ return best}
+
+function logH(t,p){S.hist.unshift({p:S.players[S.cur].name,t,pts:p})}
+function next(){armed5=false;armedC=false;S.cur=(S.cur+1)%S.players.length;S.turn=0;S.hand=0;S.kept=[];S.adds=[];d=[0,0,0,0,0]}
+function add(){const dv=d.slice(0,5-S.hand),r=score(dv);if(r.sc<=0)return;
+ const idx=[0,1,2,3,4].filter(i=>i<dv.length&&dv[i]);let kv=[];
+ for(let m=1;m<(1<<idx.length);m++){const ix=idx.filter((_,k)=>(m>>k)&1),rr=score(ix.map(i=>dv[i]));if(rr.u==ix.length&&rr.sc==r.sc&&ix.length==r.u){kv=ix.map(i=>dv[i]);break}}
+ snap();S.adds.push({sc:r.sc,prev:S.hand,pk:S.kept.slice()});S.kept.push(...kv);S.turn+=r.sc;S.hand+=r.u;
+ S.msg='';if(S.hand>=5){S.hand=0;S.kept=[];S.msg='All five scored — roll all five again!'}
+ d=[0,0,0,0,0];save();render()}
+function undo(){if(!snaps.length)return;Object.assign(S,JSON.parse(snaps.pop()));d=[0,0,0,0,0];armed5=false;armedC=false;save();render()}
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+const pipsH=v=>`<span class="pp">${[0,1,2,3,4,5,6,7,8].map(k=>`<i class="${PIPS[v].includes(k)?'on':''}"></i>`).join('')}</span>`;
+function tripleFx(name){const e=document.createElement('div');e.id='fx';
+ e.innerHTML=`<div style="font-size:72px">💀</div><div class="t">THREE CRUNCHES!</div><div class="s">${esc(name)} loses 1000 points</div><div style="color:#fecaca;margin-top:18px;font-size:14px">tap to continue</div>`;
+ e.onclick=()=>e.remove();document.body.appendChild(e);
+ try{navigator.vibrate&&navigator.vibrate([200,80,200,80,400])}catch(x){}
+ setTimeout(()=>e.remove(),3500)}
+function crunch(five){snap();const p=S.players[S.cur];p.crunches++;if(five)p.five=(p.five||0)+1;S.msg='';const L='💀 5 Dice Crunch!';
+ if(p.crunches>=3){p.crunches=0;p.score=p.score-1000;tripleFx(p.name);logH(five?L+' · three in a row':'Three crunches in a row',-1000)}else logH(five?L:'Crunch',0);
+ next();save();render()}
+function bank(){const p=S.players[S.cur];
+ if(!p.started&&S.turn<need()){S.msg='Need '+need()+' in one turn to start scoring.';render();return}
+ snap();p.started=true;p.crunches=0;p.score+=S.turn;logH('Banked',S.turn);S.msg='';
+ if(p.score>=S.target){finish(p.name);return}
+ next();save();render()}
+function finish(w){S.over=true;S.winner=w;
+ S.past.unshift({date:new Date().toLocaleDateString(),mode:S.target,winner:w,res:S.players.map(p=>p.name+' '+p.score).join(' · ')});
+ save();render()}
+function endGame(){if(S.over)return;snap();const top=[...S.players].sort((a,b)=>b.score-a.score)[0];finish(top.score>0?top.name:'No winner')}
+function undoAdd(){if(S.adds.length&&!S.over)undo()}
+function reset(){snaps=[];S.players.forEach(p=>{p.score=0;p.started=false;p.crunches=0;p.five=0});S.cur=0;S.turn=0;S.hand=0;S.kept=[];S.adds=[];S.hist=[];S.over=false;S.winner=null;S.msg='';d=[0,0,0,0,0];save();render()}
+function addPlayer(){if(S.players.length>=8)return;S.players.push({name:'Player '+(S.players.length+1),score:0,started:false,crunches:0});save();render()}
+function removePlayer(){if(S.players.length<=2)return;S.players.pop();if(S.cur>=S.players.length)S.cur=0;save();render()}
+
+function render(){
+ if(!S.playing){renderSetup();return}
+ const dv=d.slice(0,5-S.hand),r=score(dv),cur=S.players[S.cur],picked=dv.filter(Boolean).length;
+ const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+ let h=`<div class="card mute" style="text-align:center">First to ${S.target} · ${S.thresh} needed to start scoring</div>`;
+ if(S.over)h+=`<div class="win">🏆 ${esc(S.winner)} wins!</div>`;
+ if(S.over){const mx=Math.max(...S.players.map(p=>p.five||0));h+=`<div class="card"><b>💀 5 Dice Crunches</b>${S.players.map(p=>`<div class="h"><span>${esc(p.name)}</span><b>${p.five||0}</b></div>`).join('')}<div style="margin-top:8px;font-weight:700;color:var(--bad)">${mx?'Most: '+S.players.filter(p=>(p.five||0)==mx).map(p=>esc(p.name)).join(' & ')+' ('+mx+')':'No 5 dice crunches this game'}</div></div>`}
+ h+=`<div class="card">`+S.players.map((p,i)=>`<div class="pl ${i==S.cur&&!S.over?'cur':''}"><span class="n">${esc(p.name)}${p.crunches?` <span class="cx">${'❌'.repeat(p.crunches)}</span>`:''}</span><span><span class="mute">${p.started?'':'not started · '}</span><span class="s">${p.score}</span></span></div>`).join('')+
+ `</div>`;
+ h+=`<div class="card"><div class="mute" style="text-align:center">${esc(cur.name)}'s turn</div><div class="big">${S.turn}</div>
+ <div class="mute" style="text-align:center">${S.hand?(5-S.hand)+' dice left to roll':''}</div>
+ <div class="faces">${[1,2,3,4,5,6].map(f=>`<button class="fc" data-f="${f}" ${picked>=5-S.hand?'disabled':''}>${pipsH(f)}</button>`).join('')}</div><div class="mute" style="text-align:center">Tap faces to add dice · tap a chosen die to remove it</div>
+ <div class="dice">${[0,1,2,3,4].map(i=>{const act=i<5-S.hand,v=act?d[i]:(S.kept[i-(5-S.hand)]||0);return `<button class="sl2 ${act?(v?'':'x'):'lk'}" data-i="${i}" ${act&&v?'':'disabled'}>${v?pipsH(v):''}</button>`}).join('')}</div>
+ <div style="text-align:center;font-weight:600">${picked?(r.sc>0?'This roll: +'+r.sc:'No points — crunch'):'Select your dice'}</div>
+ <div class="msg">${esc(S.msg)}</div>
+ <div class="row"><button id="clr">Clear dice</button><button id="add" class="p" ${r.sc>0&&!S.over?'':'disabled'}>Add to turn</button></div>
+ <div class="row" style="margin-top:8px"><button id="cr" class="d ${armedC?'armc':''}" ${S.over?'disabled':''}>${armedC?'⚠️ Tap again to confirm':'Crunch – pass'}</button></div><div class="row" style="margin-top:8px;align-items:stretch"><button id="cr5" class="x5 big2 ${armed5?'arm':''}" ${S.over?'disabled':''}>${armed5?'⚠️ Tap again to confirm':'💀 5 Dice Crunch!'}</button><button id="bk" class="g big2" ${S.turn>0&&!S.over?'':'disabled'}>Bank turn</button></div>
+ <div class="row" style="margin-top:8px"><button id="un" ${snaps.length?'':'disabled'}>↩ Undo (${snaps.length}/10)</button><button id="ua" ${S.adds.length&&!S.over&&snaps.length?'':'disabled'}>Undo add</button></div></div>
+ <div class="row" style="margin-bottom:12px"><button id="rs" class="d">Reset scores</button><button id="eg" ${S.over?'disabled':''}>End game</button><button id="ng">New game</button></div>
+ <details><summary>Turn history</summary>${S.hist.length?S.hist.slice(0,60).map(x=>`<div class="h" ${x.t.startsWith('💀')?'style="color:var(--bad);font-weight:700"':''}><span>${esc(x.p)} · ${esc(x.t)}</span><b>${x.pts>0?'+':''}${x.pts}</b></div>`).join(''):'<div class="mute">Nothing yet.</div>'}</details>
+ <details><summary>Past games</summary>${S.past.length?S.past.map(x=>`<div class="h"><span>${esc(x.date)} · to ${x.mode}<br><span class="mute">${esc(x.res)}</span></span><b>🏆 ${esc(x.winner)}</b></div>`).join(''):'<div class="mute">No finished games.</div>'}</details>
+ <details><summary>Scoring used</summary><div class="mute">Each 1 = 100, each 5 = 50. Three of a kind = face × 100, four = ×2, five = ×4. Three 1s = 1000 (four = 2000, five = 4000). Full house (three of a kind + a pair) = the three of a kind's score + 200. Short straight (4 in a row) = 300, long straight (5) = 500. Nothing scoring is a crunch (use 5 Dice Crunch! when all five dice miss); three in a row costs 1000 points (scores can go negative). Score all five dice and roll all five again. First scoring needs ${need()} in one turn. First to ${S.target} wins.</div></details>`;
+ document.getElementById('app').innerHTML=h;
+ const $=id=>document.getElementById(id);
+ $('ng').onclick=()=>{S.playing=false;S.msg='';save();render()};
+ document.querySelectorAll('.fc').forEach(b=>b.onclick=()=>{const n=5-S.hand,i=d.slice(0,n).findIndex(x=>!x);if(i>=0){d[i]=+b.dataset.f;render()}});
+ document.querySelectorAll('.sl2').forEach(b=>b.onclick=()=>{const n=5-S.hand,v=d.slice(0,n);v.splice(+b.dataset.i,1);v.push(0);for(let k=0;k<n;k++)d[k]=v[k];render()});
+ document.querySelectorAll('.n').forEach(n=>{n.onblur=()=>{S.players[+n.dataset.i].name=n.textContent.trim()||'Player '+(+n.dataset.i+1);save();render()};n.onkeydown=e=>{if(e.key=='Enter'){e.preventDefault();n.blur()}}});
+ $('clr').onclick=()=>{d=[0,0,0,0,0];render()};$('add').onclick=add;$('cr').onclick=()=>{if(!armedC){armedC=true;armed5=false;clearTimeout(armCT);armCT=setTimeout(()=>{armedC=false;render()},4000);render();return}armedC=false;clearTimeout(armCT);crunch(false)};$('cr5').onclick=()=>{if(!armed5){armedC=false;armed5=true;clearTimeout(armT);armT=setTimeout(()=>{armed5=false;render()},4000);render();return}armed5=false;clearTimeout(armT);document.body.animate([{boxShadow:'inset 0 0 140px #b91c1c'},{boxShadow:'inset 0 0 0 transparent'}],{duration:700});crunch(true)};$('bk').onclick=bank;$('un').onclick=undo;$('ua').onclick=undoAdd;
+ $('rs').onclick=reset;$('eg').onclick=endGame;
+}
+function renderSetup(){
+ const ps=S.players,$=id=>document.getElementById(id);
+ document.getElementById('app').innerHTML=`<div class="card"><b>Players</b>`+ps.map((p,i)=>`<div class="row prow" style="margin-top:8px"><span class="hd" data-i="${i}" title="Drag to reorder">☰</span><input class="pn" data-i="${i}" value="${esc(p.name)}" maxlength="20" style="margin:0"><button class="rm d" data-i="${i}" style="flex:0 0 auto" ${ps.length<=2?'disabled':''}>✕</button></div>`).join('')+`<div class="row" style="margin-top:8px"><button id="ap" ${ps.length>=8?'disabled':''}>Add player</button></div></div>
+ <div class="card"><b>Points to start scoring</b><div class="row" style="margin-top:8px">${[300,500].map(v=>`<button class="st ${S.thresh==v?'on':''}" data-v="${v}">${v}</button>`).join('')}</div></div>
+ <div class="card"><b>Points to win</b><div class="row" style="margin-top:8px;flex-wrap:wrap">${[3000,5000,10000,15000,20000,25000].map(v=>`<button class="wn ${S.target==v?'on':''}" data-v="${v}" style="flex:1 1 28%">${v}</button>`).join('')}</div></div>
+ <div class="msg">${esc(S.msg)}</div><button id="go" class="p" style="width:100%;font-size:18px">Start game</button>`;
+ document.querySelectorAll('.hd').forEach(h=>{h.onpointerdown=e=>{e.preventDefault();h.setPointerCapture(e.pointerId);const row=h.parentElement,box=row.parentElement;row.style.opacity='.6';row.style.outline='2px solid var(--acc)';let from=+h.dataset.i;
+  h.onpointermove=ev=>{const rows=[...box.querySelectorAll('.prow')],idx=rows.findIndex(r=>{const b=r.getBoundingClientRect();return ev.clientY>=b.top&&ev.clientY<=b.bottom});
+   if(idx>=0&&idx!==from){const[pl]=S.players.splice(from,1);S.players.splice(idx,0,pl);box.insertBefore(row,idx>from?rows[idx].nextSibling:rows[idx]);from=idx}};
+  h.onpointerup=h.onpointercancel=()=>{save();render()}}});
+ document.querySelectorAll('.pn').forEach(n=>n.oninput=()=>{S.players[+n.dataset.i].name=n.value;save()});
+ document.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{if(S.players.length>2){S.players.splice(+b.dataset.i,1);save();render()}});
+ document.querySelectorAll('.st').forEach(b=>b.onclick=()=>{S.thresh=+b.dataset.v;save();render()});
+ document.querySelectorAll('.wn').forEach(b=>b.onclick=()=>{S.target=+b.dataset.v;save();render()});
+ $('ap').onclick=addPlayer;
+ $('go').onclick=()=>{const t=S.target,s=S.thresh;
+  if(![300,500].includes(s)||![3000,5000,10000,15000,20000,25000].includes(t)){S.msg='Pick points to start and points to win.';render();return}
+  if(!(t>=100)){S.msg='Win score must be at least 100.';render();return}
+  if(!(s>=0)||s>t){S.msg='Start score must be between 0 and the win score.';render();return}
+  S.target=t;S.thresh=s;S.players.forEach((p,i)=>{p.name=p.name.trim()||'Player '+(i+1)});
+  reset();S.msg='';S.playing=true;save();render()};
+}
+render();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
